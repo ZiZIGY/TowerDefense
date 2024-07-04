@@ -19,7 +19,9 @@
  * @property {number} game.entities.archer.health - Здоровье лучника.
  *
  * @property {Object} game.entities.enemy - Конфигурация врага.
+ * @property {number} game.entities.enemy.damage - Урон врага.
  * @property {number} game.entities.enemy.health - Здоровье врага.
+ * @property {number} game.entities.enemy.attackDelay - Задержка атаки врага.
  * @property {function} game.entities.enemy.awards - Возвращает награду за врага.
  * @property {function} game.entities.enemy.speed - Скорость врага.
  *
@@ -53,6 +55,8 @@ export const config = {
         health: 100,
       },
       enemy: {
+        damage: 10,
+        attackDelay: 100,
         health: 200,
         awards: () => Math.random() * 20,
         speed: () => Math.random() * 0.2 + 0.4,

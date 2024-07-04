@@ -1,4 +1,4 @@
-import { ArcherDefender, Enemy } from "../classes/entities.js";
+import { Archer, Enemy } from "../classes/entities.js";
 import {
   canvas,
   defenders,
@@ -69,7 +69,7 @@ export const collision = (first, second) => {
  */
 
 export const createArcher = (x, y, width, height) => {
-  defenders.push(new ArcherDefender(x, y, width, height));
+  defenders.push(new Archer(x, y, width, height));
 };
 export const setMouseEvents = () => {
   canvas.onmousemove = ({ x, y }) => ([mouse.x, mouse.y] = [x, y]);
@@ -81,9 +81,9 @@ export const setMouseEvents = () => {
     for (const defender of defenders) {
       if (defender.x === gridPosX && defender.y === gridPosY) return;
     }
-    if (config.game.resources > ArcherDefender.cost) {
+    if (config.game.resources > Archer.cost) {
       createArcher(gridPosX, gridPosY, config.cell.size, config.cell.size);
-      config.game.resources -= ArcherDefender.cost;
+      config.game.resources -= Archer.cost;
     }
   };
 };
@@ -94,7 +94,7 @@ export const setMouseEvents = () => {
  */
 export const spawnEnemies = () => {
   for (const enemy of enemies) {
-    enemy.update();
+    enemy.move();
     enemy.draw();
     if (enemy.x < 0) config.game.over = true;
   }
@@ -126,6 +126,5 @@ export const launchFrameTimer = (time) => {
 
   if (requestFrameTimer.current - requestFrameTimer.last >= 1) {
     requestFrameTimer.last = requestFrameTimer.current;
-    console.log(requestFrameTimer.current);
   }
 };
